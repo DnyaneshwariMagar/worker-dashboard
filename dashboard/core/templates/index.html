@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Worker Dashboard</title>
+</head>
+<body>
+
+<h1>Worker Productivity Dashboard 🚀</h1>
+
+<table border="1" id="table">
+</table>
+
+<script>
+fetch('/api/metrics/')
+.then(res => res.json())
+.then(data => {
+    let table = document.getElementById('table');
+
+    table.innerHTML = `
+    <tr>
+        <th>Name</th>
+        <th>Working</th>
+        <th>Idle</th>
+        <th>Production</th>
+    </tr>
+    `;
+
+    data.forEach(d => {
+        table.innerHTML += `
+        <tr>
+            <td>${d.name}</td>
+            <td>${d.working}</td>
+            <td>${d.idle}</td>
+            <td>${d.production}</td>
+        </tr>
+        `;
+    });
+});
+</script>
+
+</body>
+</html>
